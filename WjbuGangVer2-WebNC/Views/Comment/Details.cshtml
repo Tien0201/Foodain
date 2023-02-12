@@ -1,0 +1,67 @@
+﻿@model WjbuGangVer2_WebNC.Models.Comment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CmtMsg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CmtMsg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CmtDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CmtDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DanhGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DanhGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MatHang.TenMH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MatHang.TenMH)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CmtID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

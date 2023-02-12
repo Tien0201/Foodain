@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WjbuGangVer2_WebNC.Models.Voucher>
+@{
+    ViewBag.Title = "trash";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<h2>Danh sách đơn đặt hàng</h2>
+<a style="float:right;margin-right:50px" class="text-white btn-sm btn-danger " href="Index">Hủy<i style="font-size:15px;margin-left:3px" class="material-icons mdc-button__icon" aria-hidden="true">delete</i></a>
+
+<table class="table">
+    <tr>
+
+        <th>
+            VoucherID
+        </th>
+        <th>
+            Mã Voucher
+        </th>
+        <th>
+            Tên Đợt
+        </th>
+        <th>
+            Số tiền giảm
+        </th>
+        <th>
+            Loại giảm giá
+        </th>
+        <th>
+            Tình trạng
+        </th>
+        <th>Chức năng</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.VoucherID</td>
+
+                <td>@item.MaVoucher</td>
+
+                <td>@item.TenDot</td>
+
+                <td> @item.SoTienGiam</td>
+
+                <td> @item.LoaiGiamGia</td>
+
+                <td> @item.TinhTrang</td>
+
+                <td>
+                    <a class="btn btn-sm btn-light text-dark border" href="@Url.Action("Retrash", "Voucher", new { id = item.VoucherID })"> <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">settings_backup_restore</i> </a>
+                    <a class="btn btn-sm btn-light text-danger border" href="@Url.Action("deleteTrash", "Voucher", new { id = item.VoucherID })"> <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">delete</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

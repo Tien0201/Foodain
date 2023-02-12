@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WjbuGangVer2_WebNC.Models.HoaDon>
+@{
+    ViewBag.Title = "trash";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<h2>Danh sách đơn đặt hàng</h2>
+<a style="float:right;margin-right:50px" class="text-white btn-sm btn-danger " href="Index">Hủy<i style="font-size:15px;margin-left:3px" class="material-icons mdc-button__icon" aria-hidden="true">delete</i></a>
+
+<table class="table">
+    <tr>
+
+        <th>
+            Mã Hóa Đơn
+        </th>
+        <th>
+            Username
+        </th>
+        <th>
+            Số Lượng
+        </th>
+        <th>
+            Tổng Tiền
+        </th>
+        <th>
+            Phương Thức Thanh Toán
+        </th>
+        <th>
+            Chức Năng
+        </th>
+        <th></th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaHD</td>
+
+                <td>@item.Account.Username</td>
+
+                <td>@item.SoLuong</td>
+
+                <td> @item.TongTien</td>
+
+                <td> @item.PhuongThucThanhToan.TenPT</td>
+
+                <td>
+                    <a class="btn btn-sm btn-light text-dark border" href="@Url.Action("Retrash", "QuanLyHoaDon", new { id = item.MaHD })"> <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">settings_backup_restore</i> </a>
+                    <a class="btn btn-sm btn-light text-danger border" href="@Url.Action("deleteTrash", "QuanLyHoaDon", new { id = item.MaHD })"> <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">delete</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

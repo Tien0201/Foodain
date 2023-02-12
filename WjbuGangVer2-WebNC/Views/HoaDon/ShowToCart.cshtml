@@ -1,0 +1,188 @@
+﻿@model WjbuGangVer2_WebNC.Models.HoaDon
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/CSS/index.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/CSS/Products.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/CSS/aos.css" type="text/css">
+    <link href="~/Content/CSS/Gio Hang.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" tyoe="text/css" href="~/Content/CSS/lightbox.min.css">
+    <script src="~/Content/JAVA/lightbox-plus-jquery.min.js"></script>
+    <title>@Model.MaHD</title>
+</head>
+<body>
+    <div class="body">
+
+        @if (Model != null)
+        {
+            <table class="table" style="font-size:25px; margin:auto; width: 80%">
+                <thead>
+                    <tr>
+                        <th style="padding-right:60px">Hình ảnh</th>
+                        <th style="padding-left:30px">Sản phẩm</th>
+                        <th style="padding-left:60px">Giá</th>
+                        <th style="padding-left:150px;">Số lượng</th>
+                        <th style="padding-left:120px;">Tổng cộng</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        double total = Convert.ToDouble(item._shopping_product.DonGia * item._shopping_quantity );
+                        <tr>
+                            <td style="padding-right:50px">
+                                <img src="@item._shopping_product.HinhChinh" style="width:150px;max-height:150px" />
+                            </td>
+                            <td style="width: 20%">
+                                @Html.DisplayFor(Model => item._shopping_product.TenMH)
+                            </td>
+                            <td style="padding-left:15px">
+                                @*@Html.DisplayFor(Model => item._shopping_product.DonGia)*@
+                                @*@Convert.ToString(string.Format("{0:#,##0}", item._shopping_product.DonGia )) VNĐ*@
+                                @if (item._shopping_product.MaKH == null)
+                                {
+                                    total = Convert.ToDouble(item._shopping_product.DonGia * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", item._shopping_product.DonGia ));
+                                }
+                                @if (item._shopping_product.MaKH == 1)
+                                {
+                                    total = Convert.ToDouble((item._shopping_product.DonGia - (item._shopping_product.DonGia * 10 / 100)) * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", (item._shopping_product.DonGia - (item._shopping_product.DonGia * 10 / 100)) ));
+                                }
+                                @if (item._shopping_product.MaKH == 2)
+                                {
+                                    total = Convert.ToDouble((item._shopping_product.DonGia - (item._shopping_product.DonGia * 20 / 100)) * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", (item._shopping_product.DonGia - (item._shopping_product.DonGia * 20 / 100)) ));
+                                }
+                                @if (item._shopping_product.MaKH == 3)
+                                {
+                                    total = Convert.ToDouble((item._shopping_product.DonGia - (item._shopping_product.DonGia * 25 / 100)) * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", (item._shopping_product.DonGia - (item._shopping_product.DonGia * 25 / 100)) ));
+                                }
+                                @if (item._shopping_product.MaKH == 4)
+                                {
+                                    total = Convert.ToDouble((item._shopping_product.DonGia - (item._shopping_product.DonGia * 30 / 100)) * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", (item._shopping_product.DonGia - (item._shopping_product.DonGia * 30 / 100)) ));
+                                }
+                                @if (item._shopping_product.MaKH == 5)
+                                {
+                                    total = Convert.ToDouble((item._shopping_product.DonGia - (item._shopping_product.DonGia * 50 / 100)) * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", (item._shopping_product.DonGia - (item._shopping_product.DonGia * 50 / 100)) ));
+                                }
+                                @if (item._shopping_product.MaKH == 6)
+                                {
+                                    total = Convert.ToDouble((item._shopping_product.DonGia - 10000) * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", (item._shopping_product.DonGia - 10000) ));
+                                }
+                                @if (item._shopping_product.MaKH == 7)
+                                {
+                                    total = Convert.ToDouble((item._shopping_product.DonGia - 20000) * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", (item._shopping_product.DonGia - 20000) ));
+                                }
+                                @if (item._shopping_product.MaKH == 8)
+                                {
+                                    total = Convert.ToDouble((item._shopping_product.DonGia - 30000) * item._shopping_quantity );
+                                    @Convert.ToString(string.Format("{0:#,##0}", (item._shopping_product.DonGia - 30000) ));
+                                }
+                            </td>
+                            <td style="padding-left:120px">
+                                @using (Html.BeginForm("Update_Quantity_Cart", "HoaDon"))
+                                {
+                                    <input type="hidden" value="@item._shopping_product.MaMH" name="Ma_MH" />
+                                    <input type="number" value="@item._shopping_quantity" name="Quantity" style="width:40px; height:40px; text-align:center" />
+                                    <input type="submit" value="Cập nhật" style="padding: 0px 15px; height: 40px; color: white; background-color: #e58f00; border: none; border-radius: 7px" />
+                                }
+                            </td>
+                            <td style="padding-left:115px">
+                                @total.ToString("#,##0") VNĐ
+                            </td>
+                            <td>
+                                <a href="/HoaDon/RemoveCart/@item._shopping_product.MaMH" style="background-color: #e58f00; font-size: 20px; padding: 10px 20px; color: white; border-radius: 10%">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <table style="border-collapse:separate; border-spacing:5px">
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        @using (Html.BeginForm("NhapVoucher", "HoaDon", FormMethod.Post, new { @class = "box" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+                            if (@Session["GiaApDungVoucher"] == null)
+                            {
+                                <td colspan="5" style="padding-top: 30px; padding-left: 900px;">
+                                    <input name="voucher_input" type="text" placeholder="Nhập voucher tại đây" style="font-size: 1.5rem; padding-left: 10px; float: left; height: 50px" />
+                                    @if (@Session["Voucher_error"] != null)
+                                    {
+                                        <p style="color:red;margin-top:-25px; position:absolute; font-size: 1rem">@Session["Voucher_error"]</p>
+                                    }
+                                </td>
+                                <td>
+                                    <input type="submit" value="Áp dụng" class="btn btn-success" style="width: 100px; height: 50px; margin-left: 20px; margin-top: 20px; font-size: 15px; background-color: #e58f00; color: white; border: none; border-radius: 5px" onclick="Voucherfeo()" />
+                                </td>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="padding-top:30px;padding-left:900px">Tổng cộng: <h style="color: #e58f00; font-size: 1.5rem">@Model.Total_Money().ToString("#,##0")</h> VNĐ</td>
+                    </tr>
+                    <tr>
+                        @if (@Session["GiaApDungVoucher"] != null)
+                        {
+                            <td colspan="5" style="padding-top:30px;padding-left:615px">Tổng cộng Sau khi áp dụng Voucher: <h style="color: #e58f00; font-size: 22px">@Session["GiaApDungVoucher"]</h> VNĐ</td>
+                        }
+                    </tr>
+                </tfoot>
+            </table>
+            <br />
+            if (Session["PayFailed"] != null)
+            {
+                <p style="color: red; margin-left: 900px; margin-top: -10px; position: absolute; font-size: 1rem">@Session["PayFailed"]</p>
+            }
+            else
+            {
+                <p style="color: red; margin-left: 900px; margin-top: -10px; position: absolute; font-size: 1rem; visibility: hidden ">@Session["PayFailed"]</p>
+            }
+            if (Session["User_ID"] == null)
+            {
+                <a href="@Url.Action("AccountLogic", "Account")"><input type="submit" value="Thanh toán" class="btn btn-success" style="float: left; width: 100px; height: 50px; margin-left: 20px; margin-top: 20px; margin-left: 1200px; font-size: 15px; background-color: #e58f00; color: white; border: none; border-radius: 5px" onclick="ThanhToanfeo()" /></a>
+            }
+            else if (@Model.Total_Money() == 0)
+            {
+                <a href="@Url.Action("ShowToCart","HoaDon")"><input type="submit" value="Thanh toán" class="btn btn-success" style="float: left; width: 100px; height: 50px; margin-left: 20px; margin-top: 20px; margin-left: 1200px; font-size: 15px; background-color: #e58f00; color: white; border: none; border-radius: 5px " onclick="ThanhToanfeo2()" /></a>
+            }
+            else
+            {
+                <a href="@Url.Action("ThanhToan","HoaDon")"><input type="submit" value="Thanh toán" class="btn btn-success" style="float: left; width: 100px; height: 50px; margin-left: 20px; margin-top: 20px; margin-left: 1200px; font-size: 15px; background-color: #e58f00; color: white; border: none; border-radius: 5px " /></a>
+                <a href="@Url.Action("Payment","Home")"><input type="submit" value="Thanh toán VNPAY" class="btn btn-success" style="width: 200px; height: 50px; margin-left: 20px; margin-top: 20px; font-size: 15px; background-color: #e58f00; color: white; border: none; border-radius: 5px" /></a>
+            }
+            <a href="@Url.Action("Index","Home")" style="margin-left:600px;"><input type="submit" value="Tiếp tục mua hàng" class="btn btn-success" style="padding: 0px 20px 0px 20px; float: left; width: auto; height: 50px; margin-left: 30px; font-size: 15px; background-color: #e58f00; color: white; border: none; border-radius: 5px" /></a>
+        }
+
+    </div>
+</body>
+</html>
+<script>
+    function ThanhToanfeo() {
+        alert("Vui lòng đăng nhập trước khi thanh toán!");
+    }
+    function ThanhToanfeo2() {
+        alert("Không thể thanh toán với giỏ hàng trống!");
+    }
+</script>

@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/CSS/index.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/CSS/aos.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/CSS/csbh.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>WibuGang</title>
+</head>
+<body>
+    <div class="body">
+
+        <section class="banner group-1" data-aos="fade-up" data-aos-easing="linear" data-aos-delay="250">
+            <div class="section-container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <div class="banner-img">
+                            <img src="~/Content/Images/Food/index-1.png" class="img-fluid" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="banner-content">
+                            <h1 data-aos="fade-up" data-aos-easing="linear" data-aos-delay="500">Chào mừng đến với Foodain</h1>
+                            <p data-aos="fade-up" data-aos-easing="linear" data-aos-delay="750">Ra đời vào tháng 08/2022, FOODAIN với mong muốn “Giúp mọi người ăn ngon mọi lúc mọi nơi” đã giao hàng triệu món ăn yêu thích đến với khách hàng chỉ với một vài thao tác đơn giản: Chọn đồ ăn - Đặt hàng.</p>
+                            </br>
+                            <div class="banner-btn" data-aos="fade-up" data-aos-easing="linear" data-aos-delay="1000">
+                                <a href="@Url.Action("Index","Product","Index")">Order Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @*<section class="image-section">
+            <div class="index-slider">
+                <div class="index-slide">
+                    <input type="radio" name="radio-btn" id="radio1" />
+                    <input type="radio" name="radio-btn" id="radio2" />
+                    <input type="radio" name="radio-btn" id="radio3" />
+                    <input type="radio" name="radio-btn" id="radio3" />
+
+                    <div class="index_image_slider first">
+                        <img src="~/Content/Images/index/slider1.jpg" alt="" />
+                    </div>
+                    <div class="index_image_slider">
+                        <img src="~/Content/Images/index/slider2.png" alt="" />
+                    </div>
+                    <div class="index_image_slider">
+                        <img src="~/Content/Images/index/slider3.jpg" alt="" />
+                    </div>
+                    <div class="index_image_slider">
+                        <img src="~/Content/Images/index/slider4.jpg" alt="" />
+                    </div>
+
+                    <div class="nav-auto">
+                        <div class="a-b1"></div>
+                        <div class="a-b2"></div>
+                        <div class="a-b3"></div>
+                        <div class="a-b4"></div>
+                    </div>
+
+                    <div class="nav-m">
+                        <label for="radio1" class="m-btn"></label>
+                        <label for="radio1" class="m-btn"></label>
+                        <label for="radio1" class="m-btn"></label>
+                        <label for="radio1" class="m-btn"></label>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>*@
+
+        <div class="images-slide-container" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="500">
+            <div id="images-slide">
+                <figure>
+                    <a href="#"><img src="~/Content/Images/index/slider1.jpg" alt=""></a>
+                    <a href="#"><img src="~/Content/Images/index/slider4.jpg" alt=""></a>
+                    <a href="#"><img src="~/Content/Images/index/slider3.jpg" alt=""></a>
+                    <a href="#"><img src="~/Content/Images/index/slider4.jpg" alt=""></a>
+                    <a href="#"><img src="~/Content/Images/index/slider1.jpg" alt=""></a>
+                </figure>
+            </div>
+        </div>
+
+        <div class="new-product-container">
+            <div id="new-product-container">
+                <div data-aos="fade-up" data-aos-delay="0" data-aos-easing="linear" data-aos-duration="500" id="newest-product">
+                    <a href="#"><img src="~/Content/Images/Food/index1.jpg"></a>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="250" data-aos-easing="linear" data-aos-duration="500" style="margin-left:0.5%; background: #000000;" id="newest-product">
+                    <a href="#"><img src="~/Content/Images/Food/index2.jpg"></a>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="500" data-aos-easing="linear" data-aos-duration="500" style="margin-left:0.5%;" id="newest-product">
+                    <a href="https://rog.asus.com/vn/Phones/ROG-Phone-3-Model/"><img src="~/Content/Images/Food/index3.jpg"></a>
+                </div>
+            </div>
+        </div>
+        <div class="introduce-container">
+            <div class="new-introduce-title" data-aos="fade-up" data-aos-delay="250" data-aos-easing="linear" data-aos-duration="500">
+                Foodain
+            </div>
+            <div class="introduce-text" data-aos="fade-up" data-aos-duration="500" data-aos-easing="linear">
+                <p>
+                    mỗi ngày, Foodain toàn cầu phục vụ hơn 70 triệu người tiêu dùng, không chỉ đảm bảo mang đến cho họ những bữa ăn ngon, <br>an toàn vệ sinh, mà còn làm họ hài lòng với dịch vụ của Foodain.
+
+                    Nắm bắt nhu cầu của người tiêu dùng Việt Nam hiện nay, chúng tôi mong muốn phục vụ những bữa ăn nhanh nhưng hợp vệ sinh, đầy đủ dưỡng chất cùng với cung cách phục vụ chuyên nghiệp, Foodain cam kết sẽ làm bạn hài lòng với dòng sản phẩm nổi tiếng khắp thế giới của chúng tôi. Không chỉ được đánh giá tốt về thức ăn ngon còn nổi tiếng về chuỗi tiêu chuẩn Chất Lượng, Dịch Vụ, Vệ Sinh và Giá trị.
+                </p>
+            </div>
+            <div class="introduce-img-container">
+                <div class="introduce-img-left" data-aos="zoom-in-right" data-aos-duration="500"><img src="~/Content/Images/Food/indexleft.jpg"></div>
+                <div class="introduce-img-right">
+                    <div class="introduce-img" data-aos="zoom-in" data-aos-duration="1000"><img style="width:330px;" src="~/Content/Images/Food/indexlefttop.jpg"></div>
+                    <div class="introduce-img" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500ms"><img style="width:370px; margin-left: -10px;" src="~/Content/Images/Food/indexleftbot.jpg"></div>
+                    <div class="introduce-img" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="1000ms"><img style="width:330px;" src="~/Content/Images/Food/indexrighttop1.jpg"></div>
+                    <div class="introduce-img" data-aos="zoom-in" data-aos-duration="1000"><img style="width:330px;" src="~/Content/Images/Food/indexrighttop2.jpg"></div>
+                    <div style="width: 650px;" class="introduce-img" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500ms"><img style="width:650px;" src="~/Content/Images/Food/indexrightbot.jpg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="new-introduce-title" style="font-family: Montserrat">
+            Thực Đơn
+            <div class="colorbar">
+                <img src="~/Content/Images/index/colorbar.gif">
+            </div>
+        </div>
+        <div>
+            <div id="product-container">
+                <a href="@Url.Action("IndexNSX", "Product", new { mamh = 1})">
+                    <div data-tooltip="Gà Chiên" style="margin-right: 2%;" id="product" data-aos="fade-up" data-aos-delay="0" data-aos-easing="linear" data-aos-duration="500">
+                        <img style="margin-left: 25%;" src="~/Content/Images/Food/indexmenu4.jpg.png">
+                    </div>
+                </a>
+                <a href="@Url.Action("IndexNSX", "Product", new { mamh = 3})">
+                    <div data-tooltip="Hamburger" style="margin-right: 2%;" id="product" data-aos="fade-up" data-aos-delay="250" data-aos-easing="linear" data-aos-duration="500">
+                        <img style=" margin-left: 27%" src="~/Content/Images/Food/indexmenu5.jpg.png">
+                    </div>
+                </a>
+                <a href="@Url.Action("IndexNSX", "Product", new { mamh = 1})">
+                    <div data-tooltip="Gà Phần" id="product" data-aos="fade-up" data-aos-delay="500" data-aos-easing="linear" data-aos-duration="500">
+                        <img style=" margin-left: 27%;" src="~/Content/Images/Food/indexmenu1.jpg.png">
+                    </div>
+                </a>
+                <a href="@Url.Action("IndexNSX", "Product", new { mamh = 6 })">
+                    <div data-tooltip="Combo" style="margin-right: 2%;" id="product" data-aos="fade-up" data-aos-delay="0" data-aos-easing="linear" data-aos-duration="500">
+                        <img style="margin-left: 27%" src="~/Content/Images/Food/indexmenu3.jpg.png">
+                    </div>
+                </a>
+                <a href="@Url.Action("IndexNSX", "Product", new { mamh = 2})">
+                    <div data-tooltip="Nước Giải Khát" style="margin-right: 2%;" id="product" data-aos="fade-up" data-aos-delay="250" data-aos-easing="linear" data-aos-duration="500">
+                        <img style="margin-left: 27%" src="~/Content/Images/Food/indexmenu2.jpg.png">
+                    </div>
+                </a>
+                <div id="MoreProducts" style="cursor: pointer; text-align: center;" data-aos="fade-up" data-aos-delay="500" data-aos-easing="linear" data-aos-duration="500">
+                    <p><a style="color: rgb(48,48,48);" href="@Url.Action("Index", "Product", "Index")">Xem Thêm</a></p>
+                    <p style="font-family: 'Times New Roman', Times, serif; font-size: 60px; margin-top: -10%;">...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            easing: 'ease-out-back',
+            duration: 1000
+        });
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+
+        $('.hero__scroll').on('click', function (e) {
+            $('html, body').animate({
+                scrollTop: $(window).height()
+            }, 1200);
+    </script>
+    <script src="~/Content/JAVA/java.js"></script>
+    <script src="/Content/JAVA/newProduct.js"></script>
+</body>
+</html>

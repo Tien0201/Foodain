@@ -1,0 +1,77 @@
+﻿
+@model IEnumerable<WjbuGangVer2_WebNC.Models.HoaDon>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <tr>
+                <th>
+                    Mã Hóa Đơn
+                </th>
+                <th>
+                    Username
+                </th>
+                <th>
+                    Số Lượng
+                </th>
+                <th>
+                    Tổng Tiền
+                </th>
+                <th>
+                    Phương thức thanh toán
+                </th>
+
+                <th></th>
+
+                <th>
+                    Tình Trạng
+                </th>
+
+                <th>
+                    Chức Năng
+                </th>
+            </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="NewSearch">
+                        <td>@item.MaHD</td>
+
+                        <td>@item.Account.Username</td>
+
+                        <td>@item.SoLuong</td>
+
+                        <td> @item.TongTien</td>
+
+                        <td> @item.PhuongThucThanhToan.TenPT</td>
+
+                        <td>
+                            @if (item.TinhTrang == 1)
+                            {
+                            <td class="text-success">Đã Xác Nhận</td>
+                        }
+                        else
+                        {
+                            <td class="text-danger">Chưa Xác Nhận</td>
+                        }
+                            <td>
+                                @if (item.TinhTrang == 1)
+                                {
+                                    <a class="btn btn-sm btn-light text-success border a33" href="@Url.Action("Status", "QuanLyHoaDon", new { id = item.MaHD })"> <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">toggle_on</i> </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-sm btn-light text-danger border a33" href="@Url.Action("Status", "QuanLyHoaDon", new { id = item.MaHD })"> <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">toggle_off</i> </a>
+                                }
+                                @if (item.TinhTrang == 2)
+                                {
+                                    <a class="btn btn-sm btn-light text-danger border" href="@Url.Action("Deltrash", "QuanLyHoaDon", new { id = item.MaHD })">  <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">delete</i></a>
+                                }
+                                <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("Details", "QuanLyHoaDon", new { id = item.MaHD })">  <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">visibility</i></a>
+                            </td>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+    </div>
+</div>

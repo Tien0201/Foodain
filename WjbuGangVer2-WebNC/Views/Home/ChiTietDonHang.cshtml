@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="width: 80%; margin-left: 10%">
+    <table class="table table-striped">
+        <tr>
+            <th>Tên Mặt Hàng</th>
+            <th>Số Lượng</th>
+            <th>Giá</th>
+            <th>Tổng Giá</th>
+        </tr>
+        @foreach (var item in Model.items)
+        {
+            double total = Convert.ToDouble(item._shopping_product.DonGia * item._shopping_quantity);
+            <tr>
+                <td>@item._shopping_product.TenMH</td>
+                <td>@item._shopping_quantity</td>
+                <td>@item._shopping_product.DonGia.ToString("#,##0")</td>
+                <td>@total.ToString("#,##0")</td>
+            </tr>
+        }
+    </table>
+</div>

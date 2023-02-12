@@ -1,0 +1,125 @@
+﻿@model IEnumerable<WjbuGangVer2_WebNC.Models.LoaiMH>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+<div>
+
+
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <a style="float:right;margin-right:10px" class="text-white btn-sm btn-success " href="~/LoaiMH/Create">Thêm Loại<i style="font-size:15px;margin-left:3px" class="material-icons mdc-button__icon" aria-hidden="true">add</i></a>
+            <div>
+                <input style="float:right;margin-right: 50px; width: 200px" type="text" class="form-control" id="txtSearch" />
+                <label style="float:right;padding:10px">Search:</label>
+            </div>
+            <h2 class="m-0 font-weight-bold text-primary">Danh sách loại mặt hàng</h2>
+        </div>
+        <div id="searchViewLoaiMH"></div>
+    </div>
+
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <script>
+    $(() => {
+        getLoaiMH();
+        $('#txtSearch').on('keyup', () => {
+            getLoaiMH();
+        });
+    });
+
+        function getLoaiMH() {
+        $.ajax({
+            url: '@Url.Action("SearchLoaiMH", "LoaiMH")',
+            dataType: 'html',
+            method: 'GET',
+            data: { searchtxt: $('#txtSearch').val() },
+            success: function (res) {
+                $('#searchViewLoaiMH').html('').html(res);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    }
+    </script>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="m-0 font-weight-bold text-primary">Biểu Đồ Thống Kê</h2>
+        </div>
+        <figure class="highcharts-figure">
+            <div id="container"></div>
+            <p class="highcharts-description"> </p>
+        </figure>
+
+        <script>
+
+            $(document).ready(function () {
+                $.getJSON("/LoaiMH/getDataLoaiMH ", function (data) {
+
+                    Highcharts.chart('container', {
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false,
+                            type: 'pie'
+                        },
+                        title: {
+                            text: 'Biểu đồ thống kê loại mặt hàng'
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        accessibility: {
+                            point: {
+                                valueSuffix: '%'
+                            }
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                                }
+                            }
+                        },
+                        series: [{
+                            name: 'Brands',
+                            colorByPoint: true,
+                            data: [{
+                                name: 'Gà',
+                                y: data.Chickens
+                            },
+                            {
+                                name: 'Nước',
+                                y: data.Drinks
+                            }, {
+                                name: 'Hamburger',
+                                y: data.Hamburgers
+                            }, {
+                                name: 'Khoai',
+                                y: data.Fries
+                            }, {
+                                name: 'Khác',
+                                y: data.Other
+                            }]
+                        }]
+                    });
+                });
+            });
+
+        </script>
+    </div>
+</div>

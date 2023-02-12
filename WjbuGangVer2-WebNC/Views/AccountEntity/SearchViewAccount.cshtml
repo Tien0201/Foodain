@@ -1,0 +1,69 @@
+﻿
+@model IEnumerable<WjbuGangVer2_WebNC.Models.Account>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <tr>
+                <th>
+                    Họ Tên
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th>
+                    Địa Chỉ
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    Số Điện Thoại
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Role)
+                </th>
+
+                <th>
+                    Chức Năng
+                </th>
+            </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="NewSearch">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HoTen)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Username)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            <span class="shortDisplay"> @Html.DisplayFor(modelItem => item.DiaChi)</span>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SoDT)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role)
+                        </td>
+                        <td>
+                            <a href="@Url.Action( "Details", new { id = item.AccountID})" )> <i style="font-size:18px;padding:5px" class="material-icons mdc-button__icon" aria-hidden="true"> visibility </i> </a>
+                            <a href="@Url.Action( "Delete", new { id = item.AccountID})" )> <i style="font-size:18px;padding:5px" class="material-icons mdc-button__icon" aria-hidden="true"> delete </i> </a>
+                        </td>
+                    </tr>
+                }
+        </table>
+    </div>
+</div>

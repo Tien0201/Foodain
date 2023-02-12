@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WjbuGangVer2_WebNC.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CmtMsg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CmtDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DanhGia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatHang.TenMH)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CmtMsg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CmtDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParentID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DanhGia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatHang.TenMH)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CmtID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CmtID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CmtID })
+        </td>
+    </tr>
+}
+
+</table>

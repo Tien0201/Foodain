@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WjbuGangVer2_WebNC.Models.HoaDon>
+
+@{
+    ViewBag.Title = "ChiTietDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var url = "@Url.Action(\"UserDelete\", \"Home\", new { id =";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<div class="mt-2" style="width: 80%; margin-left: 10%">
+    <table class="table table-striped">
+        <tr>
+            <th>ID Đơn hàng</th>
+            <th>Ngày Đặt</th>
+            <th>Số Lượng</th>
+            <th>Tổng Giá</th>
+            <th>Tình Trạng</th>
+            <th>Chi Tiết</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td id="getitemID">@item.MaHD</td>
+                <td>@item.Ngay</td>
+                <td>@item.SoLuong</td>
+                <td>@item.TongTien.ToString("#,##0") VNĐ</td>
+
+                @if (item.TinhTrang == 1)
+                {
+                    <td class="text-success">Đã Xác Nhận</td>
+                }
+                else
+                {
+                    <td class="text-danger">Chưa Xác Nhận</td>
+                }
+            <td>
+                @if (item.TinhTrang == 1)
+                {
+                    <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("ChiTietDonHang", "Home", new { id = item.MaHD })">  <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">visibility</i></a>
+                }
+                else
+                {
+                    <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("ChiTietDonHang", "Home", new { id = item.MaHD })">  <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">visibility</i></a>
+                    <input type="submit" value="Hủy Đơn Hàng" onclick="DeleteConfirm(@item.MaHD)" style="padding: 3px 10px; background-color: #e58f00; color: white; border-radius: 5px; border: none" />
+                }
+            </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+<script>
+    function DeleteConfirm(MaHD) {
+        swal({
+            title: "Bạn chắc chứ?",
+            text: "Một khi đã hủy thì sẽ không thể khôi phục lại đơn hàng này",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Đơn hàng đã được hủy", { icon: "success", });
+                    console.log(MaHD);
+                    window.location.href = '/Home/UserDelete/' + MaHD;
+                } else {
+                    swal("Đơn hàng được giữ lại");
+                }
+            });
+        };
+</script>

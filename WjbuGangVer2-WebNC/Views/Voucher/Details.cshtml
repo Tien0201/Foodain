@@ -1,0 +1,59 @@
+﻿@model WjbuGangVer2_WebNC.Models.Voucher
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Voucher</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaVoucher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaVoucher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDot)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDot)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoTienGiam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoTienGiam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LoaiGiamGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LoaiGiamGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VoucherID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

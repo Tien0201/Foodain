@@ -1,0 +1,32 @@
+﻿
+@model IEnumerable<WjbuGangVer2_WebNC.Models.LoaiMH>
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <tr>
+                <th>
+                    Tên loại
+                </th>
+
+                <th>
+                    Chức Năng
+                </th>
+            </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="NewSearch">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenLoai)
+                        </td>
+                        <td>
+                            <a href="@Url.Action( "Edit", new { id = item.MaLoai})" )> <i style="font-size:18px;padding:5px" class="material-icons mdc-button__icon" aria-hidden="true"> edit </i> </a>
+                            <a href="@Url.Action( "Delete", new { id = item.MaLoai})" )> <i style="font-size:18px;padding:5px" class="material-icons mdc-button__icon" aria-hidden="true"> delete </i> </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

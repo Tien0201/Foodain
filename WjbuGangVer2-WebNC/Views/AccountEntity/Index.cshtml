@@ -1,0 +1,81 @@
+﻿
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+<style>
+    .shortDisplay:hover {
+        overflow: visible;
+        white-space: pre-line;
+        width: 500px;
+        line-break: auto;
+    }
+
+    .shortDisplay {
+        display: inline-block;
+        max-width: 300px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+</style>
+
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div>
+            <input style="float:right;margin-right: 50px; width: 200px" type="text" class="form-control" id="txtSearch" />
+            <label style="float:right;padding:10px">Search:</label>
+        </div>
+        <h2 class="m-0 font-weight-bold text-primary">Danh Sách Tài Khoản</h2>
+    </div>
+    <div class="Search">
+        <div id="searchViewAccount"></div>
+    </div>
+</div>
+<script>
+    $(() => {
+        getAccount();
+        $('#txtSearch').on('keyup', () => {
+            getAccount();
+        });
+    });
+
+    function getAccount() {
+        $.ajax({
+            url: '@Url.Action("SearchAccount", "AccountEntity")',
+            dataType: 'html',
+            method: 'GET',
+            data: { searchtxt: $('#txtSearch').val() },
+            success: function (res) {
+                $('#searchViewAccount').html('').html(res);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

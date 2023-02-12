@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    .shortDisplay:hover {
+        overflow: visible;
+        white-space: pre-line;
+        width: 500px;
+        line-break: auto;
+        word-break: break-all;
+    }
+
+    .shortDisplay {
+        display: inline-block;
+        max-width: 300px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+</style>
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <a style="float:right;margin-right:10px" class="text-white btn-sm btn-success " href="~/MatHang/Create">Thêm Sản Phẩm<i style="font-size:15px;margin-left:3px" class="material-icons mdc-button__icon" aria-hidden="true">add</i></a>
+        <div>
+            <input style="float:right;margin-right: 50px; width: 200px" type="text" class="form-control" id="txtSearch" />
+            <label style="float:right;padding:10px">Search:</label>
+        </div>
+        <h2 class="m-0 font-weight-bold text-primary">Danh sách Sản Phẩm</h2>
+    </div>
+    <div id="searchViewMatHang"></div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h2 class="m-0 font-weight-bold text-primary">Biểu Đồ Thống Kê</h2>
+    </div>
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description"> </p>
+    </figure>
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+
+    <script>
+
+    $(() => {
+        getMatHang();
+        $('#txtSearch').on('keyup', () => {
+            getMatHang();
+        });
+    });
+
+        function getMatHang() {
+        $.ajax({
+            url: '@Url.Action("SearchMatHang", "MatHang")',
+            dataType: 'html',
+            method: 'GET',
+            data: { searchtxt: $('#txtSearch').val() },
+            success: function (res) {
+                $('#searchViewMatHang').html('').html(res);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $.getJSON("/MatHang/getDataMatHang", function (data) {
+
+                Highcharts.chart('container', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: ''
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    accessibility: {
+                        point: {
+                            valueSuffix: '%'
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Tỉ lệ',
+                        colorByPoint: true,
+                        data: [{
+                            name: 'Gà',
+                            y: data.Chickens
+                        },
+                        {
+                            name: 'Nước',
+                            y: data.Drinks
+                        }, {
+                            name: 'Hamburger',
+                            y: data.Hamburgers
+                        }, {
+                            name: 'Khoai',
+                            y: data.Fries
+                        }, {
+                            name: 'Khác',
+                            y: data.Other
+                        }]
+                    }]
+                });
+            });
+        });
+    </script>
+</div>

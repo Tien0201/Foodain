@@ -1,0 +1,202 @@
+﻿@model WjbuGangVer2_WebNC.Models.HoaDon
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap; /* IE10 */
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
+
+        .col-25 {
+            -ms-flex: 25%; /* IE10 */
+            flex: 25%;
+        }
+
+        .col-50 {
+            -ms-flex: 50%; /* IE10 */
+            flex: 50%;
+        }
+
+        .col-75 {
+            -ms-flex: 75%; /* IE10 */
+            flex: 75%;
+        }
+
+        .col-25,
+        .col-50,
+        .col-75 {
+            padding: 0 16px;
+        }
+
+        .container {
+            background-color: #f2f2f2;
+            padding: 5px 20px 15px 20px;
+            border: 1px solid lightgrey;
+            border-radius: 3px;
+        }
+
+        input[type=text] {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .icon-container {
+            margin-bottom: 20px;
+            padding: 7px 0;
+            font-size: 24px;
+        }
+
+        .btn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            width: 100%;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+            .btn:hover {
+                background-color: #45a049;
+            }
+
+        a {
+            color: #2196F3;
+        }
+
+        hr {
+            border: 1px solid lightgrey;
+        }
+
+        span.price {
+            float: right;
+            color: grey;
+        }
+    </style>
+</head>
+<body>
+    @if (Model == null)
+    {
+        <h1>Khong tim thay san pham!</h1>
+    }
+    else
+    {
+        <a href="@Url.Action("Index", "Home")">
+            <img height="100" style="margin-left:60px" src="/Content/Images/index/new logo.png">
+        </a>
+        <div style=" display:inline-block;">
+            <h2 style="color: #5ac5f1"> | Xác Nhận Giao Hàng</h2>
+            <h4 style=" margin-left:1410px">Thông tin đơn hàng</h4>
+        </div>
+        using (Html.BeginForm("XacNhanDatHang", "HoaDon", FormMethod.Post, new { @class = "box" }))
+        {
+            <h2 style="color: #00ff00 ">Thanh Toán thành công </h2>
+
+            <form name="form1" class="box" action="">
+                <div class="row">
+                    <div class="col-75">
+                        <div class="container">
+                            <form action="/action_page.php">
+                                <div class="row">
+                                    <div class="col-50" id="info">
+                                        <h3>Thông tin khách hàng</h3>
+                                        <label for="fname"><i class="fa fa-user"></i> Họ và tên</label>
+                                        <input type="text" id="fname" name="firstname" value="@Session["User_Name"]" , new { disabled="disabled" }>
+                                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                        <input type="text" id="email" name="email" value="@Session["User_Email"]" , new { disabled="disabled" }>
+                                        <label for="adr"><i class="fa fa-address-card-o"></i> Địa chỉ</label>
+                                        <input type="text" id="adr" name="address" value="@Session["User_Diachi"]" , new { disabled="disabled" }>
+                                        <label for="city"><i class="fa fa-institution"></i> Thành phố</label>
+                                        <input type="text" id="city" name="city" placeholder="Hồ Chí Minh">
+
+                                        <div class="row">
+                                            <div class="col-50">
+                                                <label for="state">Quận</label>
+                                                <input type="text" id="state" name="state" placeholder="">
+                                            </div>
+                                            <div class="col-50">
+                                                <label for="zip">Số điện thoại</label>
+                                                <input type="text" id="SoDT" name="zip" placeholder="" value="@Session["User_SoDT"]" , new { disabled="disabled" }>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <label>
+                                    <input type="checkbox" checked="checked" name="sameadr"> Địa chỉ giao hàng giống thanh toán
+                                </label>
+                                <input type="submit" value="Xác nhận giao hàng" class="btn" onclick="GiaoHangSucess()">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-25">
+                        <div class="container">
+                            @foreach (var item in Model.Items)
+                            {
+                                double total = Convert.ToDouble(item._shopping_product.DonGia * item._shopping_quantity);
+
+                                <p>
+                                    @item._shopping_product.TenMH <i class="fa fa-shopping-cart"></i> <input style="width: 20px; background-color: #f2f2f2; border:none" name="quantity" value="@item._shopping_quantity.ToString("#,##0")" readonly>
+                                    <input style="border: none; background-color: #f2f2f2; width:auto" class="price" name="totalprice" value="@total.ToString("#,##0") VNĐ" readonly>
+                                    <input style="margin-left: 150px; border: none; background-color: #f2f2f2; width:auto" class="price" name="totalprice" value="-> @item._shopping_price.ToString("#,##0") VNĐ" readonly>
+                                </p>
+                                <hr>
+                            }
+                            @if (@Session["GiaApDungVoucher"] == null)
+                            {
+                                <p>Áp dụng mã giảm giá: <span class="price" style="color:black"><b>Không</b></span></p>
+                                <p>Tổng cộng: <span class="price" style="color:black"><b>@Model.Total_Money().ToString("#,##0") VNĐ</b></span></p>
+                            }
+                            else
+                            {
+                                double tong = @Model.Total_Money();
+                                double giam = Convert.ToDouble(Session["GiaApDungVoucher"]);
+                                double conlai = tong - giam;
+                                <p>Tổng cộng: <span class="price" style="color:black"><b>@Model.Total_Money().ToString("#,##0") VNĐ</b></span></p>
+                                <p>Áp dụng mã giảm giá: <span class="price" style="color:black"><b>Có</b></span></p>
+                                <p>Giảm: <span class="price" style="color:black"><b>@conlai.ToString("#,##0") VNĐ</b></span></p>
+                                <p>Còn lại: <span class="price" style="color:black"><b>@Session["GiaApDungVoucher"] VNĐ</b></span></p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        }
+    }
+</body>
+</html>
+<script>
+    function GiaoHangSucess() {
+        alert("Đặt hàng thành công! Đơn hàng của bạn sẽ được giao nhanh nhất có thể");
+    }
+</script>

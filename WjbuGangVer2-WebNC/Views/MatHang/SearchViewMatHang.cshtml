@@ -1,0 +1,69 @@
+﻿
+@model IEnumerable<WjbuGangVer2_WebNC.Models.MatHang>
+<div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <th>
+                        Tên Sản Phẩm
+                    </th>
+                    <th>
+                        Tên Loại
+                    </th>
+                    <th>
+                        Mô Tả
+                    </th>
+                    <th>
+                        Hình Sản Phẩm
+                    </th>
+                    <th>
+                        Size
+                    </th>
+                    <th>
+                        Số Lượng
+                    </th>
+                    <th>
+                        Đơn Giá
+                    </th>
+                    <th>
+                        Chức Năng
+                    </th>
+                </tr>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="NewSearch">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TenMH)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LoaiMH.TenLoai)
+                            </td>
+                            <td>
+                                <span title="@Html.DisplayFor(modelItem => item.MoTa)" class="shortDisplay"> @Html.DisplayFor(modelItem => item.MoTa)</span>
+                            </td>
+                            <td>
+                                <img src="@Url.Content(item.HinhChinh ?? "~/Content/Images/add.png")" width="100" height="100" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Size)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SoLuong)
+                            </td>
+                            <td>
+                                @Convert.ToString(string.Format("{0:#,##0}", item.DonGia))
+                            </td>
+                            <td>
+                                <a href="@Url.Action( "Edit", new { id = item.MaMH})" )> <i style="font-size:18px;padding:5px" class="material-icons mdc-button__icon" aria-hidden="true"> edit </i> </a>
+                                <a href="@Url.Action( "Details", new { id = item.MaMH})" )> <i style="font-size:18px;padding:5px" class="material-icons mdc-button__icon" aria-hidden="true"> visibility </i> </a>
+                                <a href="@Url.Action( "Delete", new { id = item.MaMH})" )> <i style="font-size:18px;padding:5px" class="material-icons mdc-button__icon" aria-hidden="true"> delete </i> </a>
+
+                            </td>
+                        </tr>
+                    }
+            </table>
+        </div>
+    </div>
+</div>

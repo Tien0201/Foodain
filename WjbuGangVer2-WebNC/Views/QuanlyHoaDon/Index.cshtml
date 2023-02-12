@@ -1,0 +1,147 @@
+﻿@model IEnumerable<WjbuGangVer2_WebNC.Models.HoaDon>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+<!--datatable-->
+<script src="~/Theme/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Theme/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="~/Theme/js/demo/datatables-demo.js"></script>
+<link href="~/Theme/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <a style="float:right;margin-right:50px" class="text-white btn-sm btn-danger " href="~/QuanlyHoaDon/trash">Xóa<i style="font-size:15px;margin-left:3px" class="material-icons mdc-button__icon" aria-hidden="true">delete</i></a>
+        <div>
+            <input style="float:right;margin-right: 50px; width: 200px" type="text" class="form-control" id="Search" />
+            <label style="float:right;padding:10px">Search:</label>
+        </div>
+        <h2 class="m-0 font-weight-bold text-primary">Danh sách đơn đặt hàng</h2>
+    </div>
+    <div id="searchViewHoaDon"></div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                    <th>
+                        Mã Hóa Đơn
+                    </th>
+                    <th>
+                        Username
+                    </th>
+                    <th>
+                        Số Lượng
+                    </th>
+                    <th>
+                        Tổng Tiền
+                    </th>
+                    <th>
+                        Phương thức thanh toán
+                    </th>
+
+                    <th>
+                        Tình Trạng
+                    </th>
+
+                    <th>
+                        Chức Năng
+                    </th>
+                </tr>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="NewSearch">
+                            <td>@item.MaHD</td>
+
+                            <td>@item.Account.Username</td>
+
+                            <td>@item.SoLuong</td>
+
+                            <td> @item.TongTien</td>
+
+                            <td> @item.PhuongThucThanhToan.TenPT</td>
+
+                            @if (item.TinhTrang == 1)
+                            {
+                                <td class="text-success">Đã Xác Nhận</td>
+                            }
+                            else
+                            {
+                                <td class="text-danger">Chưa Xác Nhận</td>
+                            }
+                            <td>
+                                @if (item.TinhTrang == 1)
+                                {
+                                    <a class="btn btn-sm btn-light text-success border a33" href="@Url.Action("Status", "QuanLyHoaDon", new { id = item.MaHD })"> <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">toggle_on</i> </a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-sm btn-light text-danger border a33" href="@Url.Action("Status", "QuanLyHoaDon", new { id = item.MaHD })"> <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">toggle_off</i> </a>
+                                }
+                                @if (item.TinhTrang == 2)
+                                {
+                                    <a class="btn btn-sm btn-light text-danger border" href="@Url.Action("Deltrash", "QuanLyHoaDon", new { id = item.MaHD })">  <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">delete</i></a>
+                                }
+                                <a class="btn btn-sm btn-light text-warning border" href="@Url.Action("Details", "QuanLyHoaDon", new { id = item.MaHD })">  <i style="font-size:20px" class="material-icons mdc-button__icon" aria-hidden="true">visibility</i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(() => {
+        getHoaDon();
+
+        $('#txtSearch').on('keyup', () => {
+            getHoaDon();
+        });
+    });
+
+    function getHoaDon() {
+        $.ajax({
+            url: '@Url.Action("SearchHoaDon", "QuanLyHoaDon")',
+            dataType: 'html',
+            method: 'GET',
+            data: { searchtxt: $('#txtSearch').val() },
+            success: function (res) {
+                $('#searchViewHoaDon').html('').html(res);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
+    }
+</script>
+
+

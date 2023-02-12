@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="67da1ed7d00f40df8e7e2e7cc5e2bb56" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="QLBHModel.Account" Width="1.5" PointX="12.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Admin" Width="1.5" PointX="0.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.ChiTietHoaDon" Width="1.5" PointX="5.625" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Comment" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.HoaDon" Width="1.5" PointX="8.375" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.KhuyenMai" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.LoaiMH" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.MatHang" Width="1.5" PointX="4.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.PhuongThucThanhToan" Width="1.5" PointX="12.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.sysdiagram" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Voucher" Width="1.5" PointX="0.75" PointY="14.875" IsExpanded="true" />
+        <AssociationConnector Association="QLBHModel.FK__Comments__Accoun__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__HoaDon__AccountI__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__ChiTietHoa__MaHD__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__ChiTietHoa__MaMH__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__Comments__MaMH__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__HoaDon__MaPT__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__HoaDon__VoucherI__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__MatHang__MaKH__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__MatHang__MaLoai__4AB81AF0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
